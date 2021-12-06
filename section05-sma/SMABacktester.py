@@ -113,4 +113,15 @@ class SMABacktester():
         self.set_parameters(int(SMA[0]), int(SMA[1]))
         return -self.test_strategy()[0]
 
+    def optimize_parameters(self, SMA1_range, SMA2_range):
+        ''' Finds global maximum give the SMA parameter ranges
+        
+        Parameters
+        ==========
+        SMA1_range, SMA2_range: tuple
+            tuples of the form (start, end, step size)
+        '''
+
+        opt = brute(self.update_and_run,(SMA1_range, SMA2_range), finish=None)
+        return opt, -self.update_and_run(opt)
 
