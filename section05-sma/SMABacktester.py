@@ -92,3 +92,13 @@ class SMABacktester():
         outperf = perf - data["creturns"].iloc[-1]
         return round(perf, 6), round(outperf, 6)
 
+    def plot_results(self):
+        ''' Plots the cumulative performance of the trading strategy
+        compared to buy and hold
+        '''
+        if self.results is None:
+            print("No results to plot yet. Run a strategy")
+        else:
+            title = "{} | SMA_S = {} | SMA_L = {}".format(self.symbol, self.SMA_S, self.SMA_L)
+            self.results[["creturns","cstrategy"]].plot(title=title, figsize = (12,8))
+
