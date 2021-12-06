@@ -102,3 +102,15 @@ class SMABacktester():
             title = "{} | SMA_S = {} | SMA_L = {}".format(self.symbol, self.SMA_S, self.SMA_L)
             self.results[["creturns","cstrategy"]].plot(title=title, figsize = (12,8))
 
+    def update_and_run(self, SMA):
+        ''' Updates SMA parameters and returns the negative absolute performance (for minimization algorithm).
+
+        Parameters
+        ==========
+        SMA: tuple
+            SMA parameter tuple
+        '''
+        self.set_parameters(int(SMA[0]), int(SMA[1]))
+        return -self.test_strategy()[0]
+
+
